@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1525603794 source:c:\users\casa\desktop\ep1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1525568256 source:c:\users\casa\downloads\grafo_listaadj.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1525705605 source:c:\users\casa\desktop\ep1\grafo_listaadj.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1525656175 source:c:\users\casa\desktop\ep1\heap_binario.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+
