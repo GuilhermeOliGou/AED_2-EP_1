@@ -2,29 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include "heap_binario.h"
 
-//Implementação usando vetores
+#define DBL_MAX INFINITY
 
-typedef struct {
-    int distancia;/* Representa a distância de um vértice em relação ao S*/
-    int mapaDeRetorno;/* Indica a qual vértice do grafo representa essa determinada distância*/
-}NO;
-
-typedef struct {
-    NO* arvore; /* Cada índice representa um nó da árvore heap
-                Organizado na ordem correta
-                O índice 1 representa a raiz, ou aquele que tem amior prioridade*/
-
-    int* mapa; /* Os índices representam os vértices do grafo
-                Os valores representam a posição deles na árvore Heap
-                Índice 1 representa o primeiro vértice do grafo*/
-    int numElementos;
-    int maxElementos;
-}HeapBinario;
-
-/* Essa função inverte dois vértices na estrutura interna da árvore
-Ela pega como parâmetro o heap de onde os NOs tem origem
-E os dois nós que ela deve alterar*/
 void inverterNaArvore (HeapBinario* heap, int v1, int v2){
     int aux1 = heap->arvore[v1].distancia;
     int aux2 = heap->arvore[v1].mapaDeRetorno;
@@ -34,9 +15,6 @@ void inverterNaArvore (HeapBinario* heap, int v1, int v2){
     heap->arvore[v2].mapaDeRetorno = aux2;
 }
 
-/* Essa função inverte dois vértices na estrutura do mapa de indexação
-Ela pega como parâmetro o heap de onde os Vertices tem origem
-E os dois Vertices que ela deve alterar*/
 void inverter (HeapBinario* heap, int v1, int v2){
     if (v1 <= 0){
         printf("Valor de v1 , %d,muito baixo!\n", v1);
@@ -60,11 +38,6 @@ void inverter (HeapBinario* heap, int v1, int v2){
     inverterNaArvore(heap, heap->mapa[v1], heap->mapa[v2]);
 }
 
-/* Essa função modifica o valor de algum elemento na árvore do heap
-E no mapa de indexação
-E o realoca adequadamente nas estruturas
-Ela pega como parâmetro o heap de onde o Vértice tem origem
-O vértice que deverá ser alterado e o valor que ele assumirá*/
 void alteraElemento (HeapBinario* heap, int elementoAlterado, int valor){
     if (valor < 0){
         printf("Novo valor muito baixo!\n");
@@ -86,11 +59,9 @@ void alteraElemento (HeapBinario* heap, int elementoAlterado, int valor){
     heap->arvore[indice].distancia = valor;
     int indicePai;
     while(true){
-        indicePai = (indice - (indice%2))/2; /*Essa equação faz com que, a partir do índice atual
-                                             Eu possa encontrar o índice do nó pai*/
+        indicePai = (indice - (indice%2))/2;
         if (indice <= 1 ||
-            heap->arvore[indice].distancia >= heap->arvore[indicePai].distancia){/*Verificação se ou o nó é raiz
-                                                                            ou se é menor/igual ao pai*/
+                heap->arvore[indice].distancia >= heap->arvore[indicePai].distancia){
             break;
         }
         inverter(heap, heap->arvore[indice].mapaDeRetorno, heap->arvore[indicePai].mapaDeRetorno);
@@ -98,9 +69,6 @@ void alteraElemento (HeapBinario* heap, int elementoAlterado, int valor){
     }
 }
 
-/* Essa função inicializa o heap e define o vértice origem como tendo distância 0
-Ela pega como parâmetros o heap onde os dados serão colocados,
-Além do número de vértice alocados e o vértice origem do percurso*/
 bool buildHeap (HeapBinario* heap, int nn, int verticeS){
     if (nn <= 0){
         printf("Quantidade de nós muito baixa!\n");
@@ -122,7 +90,7 @@ bool buildHeap (HeapBinario* heap, int nn, int verticeS){
     heap->maxElementos = nn;
     int i;
     for (i = 1; i <= nn; i++){
-        heap->arvore[i].distancia = INFINITY;
+        heap->arvore[i].distancia = DBL_MAX;
         heap->arvore[i].mapaDeRetorno = i;
         heap->mapa[i] = i;
     }
@@ -130,8 +98,6 @@ bool buildHeap (HeapBinario* heap, int nn, int verticeS){
     return true;
 }
 
-/* Essa função reorganiza o heap depois que a raiz recebe um pop
-Ela pega como parâmetros somente o heap cuja raiz recebeu o pop*/
 void heapify (HeapBinario* heap){
     int indice = 1;
     int indiceFilho;
@@ -151,10 +117,12 @@ void heapify (HeapBinario* heap){
     }
 }
 
-/* Essa função retorna o valor e exclui o elemento de maior prioridade no heap (pop)
-Ela pega como parâmetro o heap cuja raiz receberá o pop*/
+bool possuiElementos (HeapBinario* heap){
+    return heap->numElementos > 0;
+}
+
 int popElementoPrioritario (HeapBinario* heap){
-    if (heap->numElementos <= 0){
+    if (!possuiElementos(heap)){
         printf("Não há mais elementos nesse Heap!\n");
         return false;
     }
@@ -168,9 +136,7 @@ int popElementoPrioritario (HeapBinario* heap){
     return heap->arvore[heap->numElementos+1].mapaDeRetorno;
 }
 
-/* Essa função retorna a distância de um vértice específico da raiz
-Ela pega como parâmetros o heap de onde o vértice tem origem e o vértice*/
-int retornaDistancia(HeapBinario* heap, int vertice){
+double retornaDistancia(HeapBinario* heap, int vertice){
     if (vertice <= 0){
         printf("Valor do vertice , %d,muito baixo!\n", vertice);
         return -1;
@@ -181,46 +147,3 @@ int retornaDistancia(HeapBinario* heap, int vertice){
     }
     return heap->arvore[heap->mapa[vertice]].distancia;
 }
-
-//TESTE
-/*void printaHeap (HeapBinario* heap){
-    int i;
-    for (i = 1; i <= heap->numElementos; i++){
-        printf("%d : %d\n", heap->arvore[i].mapaDeRetorno, heap->arvore[i].distancia);
-    }
-}
-
-int main(){
-    HeapBinario heap;
-    buildHeap(&heap, 10, 5);
-    printaHeap(&heap);
-    alteraElemento(&heap, 6, 1);
-    printaHeap(&heap);
-    alteraElemento(&heap, 7, 7);
-    printaHeap(&heap);
-    alteraElemento(&heap, 10, 7);
-    printaHeap(&heap);
-    alteraElemento(&heap, 1, 3);
-    printaHeap(&heap);
-    alteraElemento(&heap, 3, 8);
-    printaHeap(&heap);
-    alteraElemento(&heap, 9, 5);
-    printaHeap(&heap);
-    alteraElemento(&heap, 2, 9);
-    printaHeap(&heap);
-    alteraElemento(&heap, 4, 17);
-    printaHeap(&heap);
-    alteraElemento(&heap, 8, 7);
-    printaHeap(&heap);
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    printf("Numero: %d\n", popElementoPrioritario(&heap));
-    return 1;
-}*/

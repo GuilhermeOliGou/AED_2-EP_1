@@ -19,3 +19,59 @@
 	<stdbool.h>
 	<math.h>
 
+1525961916 source:c:\users\administrador\desktop\aed_2-ep_1\grafo_listaadj.c
+	<stdlib.h>
+	<stdbool.h>
+	"grafo_listaadj.h"
+
+1525961520 c:\users\administrador\desktop\aed_2-ep_1\grafo_listaadj.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1525967884 source:c:\users\administrador\desktop\aed_2-ep_1\heap_binario.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+	"heap_binario.h"
+
+1525961520 source:c:\users\administrador\desktop\aed_2-ep_1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1525967930 c:\users\administrador\desktop\aed_2-ep_1\heap_binario.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+
+1525967884 source:c:\users\administrador\desktop\aed_2-ep_1\dijkstra.c
+	<stdio.h>
+	<stdlib.h>
+	"heap_binario.h"
+	"grafo_listaadj.h"
+
+1526011009 source:c:\users\casa\desktop\aed_2-ep_1\grafo_listaadj.c
+	<stdlib.h>
+	<stdbool.h>
+	"grafo_listaadj.h"
+
+1526011046 c:\users\casa\desktop\aed_2-ep_1\grafo_listaadj.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1525967886 source:c:\users\casa\desktop\aed_2-ep_1\heap_binario.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+	"heap_binario.h"
+
+1525967932 c:\users\casa\desktop\aed_2-ep_1\heap_binario.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+

@@ -33,16 +33,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../Downloads/grafo_listaadj.h" />
+		<Unit filename="dijkstra.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="grafo_listaadj.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="grafo_listaadj.h" />
 		<Unit filename="heap_binario.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="heap_binario.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

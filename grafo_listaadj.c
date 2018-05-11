@@ -9,19 +9,7 @@
 
 typedef double TipoPeso;
 
-typedef struct taresta {
-  double vdest;
-  TipoPeso peso;
-  struct taresta * prox;
-} TipoAresta;
-
 typedef TipoAresta* TipoApontador;
-
-typedef struct {
-  TipoApontador *listaAdj;
-  int numVertices;
-  int numArestas;
-} TipoGrafo;
 
 bool inicializaGrafo(TipoGrafo* g, int nv){
     if (nv <= 0){
@@ -251,25 +239,6 @@ int verticeDestino(TipoApontador p, TipoGrafo* grafo){
     return p->vdest;
 }
 
-/*int main(){
-    TipoGrafo grafo;
-    inicializaGrafo(&grafo, 5);
-    insereAresta(2,4,5,&grafo);
-    insereAresta(1,3,5,&grafo);
-    insereAresta(1,2,5,&grafo);
-    insereAresta(4,3,5,&grafo);
-    insereAresta(3,5,5,&grafo);
-    insereAresta(5,3,5,&grafo);
-    insereAresta(1,5,5,&grafo);
-    imprimeGrafo(&grafo);
-
-    liberaGrafo(&grafo);
-
-    if (existeAresta(3,5,&grafo))
-        printf("Batata\n");
-
-    printf("\n");
-
-    imprimeGrafo(&grafo);
-    return 1;
-}*/
+double obtemPesoInstantaneo (TipoApontador p){
+    return p->peso;
+}

@@ -137,5 +137,5 @@ void liberaGrafo(TipoGrafo* grafo);
    retorna o vertice destino da aresta apontada por p */
 int verticeDestino(TipoApontador p, TipoGrafo* grafo);
 
-
+double obtemPesoInstantaneo (TipoApontador p);
 
