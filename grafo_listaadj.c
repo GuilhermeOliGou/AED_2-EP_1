@@ -23,6 +23,7 @@ bool inicializaGrafo(TipoGrafo* g, int nv){
     }
     g->listaAdj = novo;
     g->numVertices = nv;
+    g->numArestas = 0;
     int i;
     for (i = 1; i <= nv; i++){
         g->listaAdj[i] = AN;

@@ -4,7 +4,7 @@
 #include <math.h>
 #include "heap_binario.h"
 
-#define DBL_MAX INFINITY
+#define DBL_MAX 2147483647
 
 void inverterNaArvore (HeapBinario* heap, int v1, int v2){
     int aux1 = heap->arvore[v1].distancia;
@@ -38,7 +38,7 @@ void inverter (HeapBinario* heap, int v1, int v2){
     inverterNaArvore(heap, heap->mapa[v1], heap->mapa[v2]);
 }
 
-void alteraElemento (HeapBinario* heap, int elementoAlterado, int valor){
+void alteraElemento (HeapBinario* heap, int elementoAlterado, double valor){
     if (valor < 0){
         printf("Novo valor muito baixo!\n");
         return;
@@ -121,19 +121,26 @@ bool possuiElementos (HeapBinario* heap){
     return heap->numElementos > 0;
 }
 
-int popElementoPrioritario (HeapBinario* heap){
+double popElementoPrioritario (HeapBinario* heap){
     if (!possuiElementos(heap)){
         printf("Não há mais elementos nesse Heap!\n");
-        return false;
+        return -1;
+    }
+    return heap->arvore[1].mapaDeRetorno;
+}
+
+void excluiElementoPrioritario(HeapBinario* heap){
+    if (!possuiElementos(heap)){
+        printf("Não há mais elementos nesse Heap!\n");
+        return;
     }
     if (heap->numElementos == 1){
         heap->numElementos = heap->numElementos-1;
-        return heap->arvore[1].mapaDeRetorno;
+        return;
     }
     inverter(heap, heap->arvore[1].mapaDeRetorno, heap->arvore[heap->numElementos].mapaDeRetorno);
     heap->numElementos = heap->numElementos-1;
     heapify(heap);
-    return heap->arvore[heap->numElementos+1].mapaDeRetorno;
 }
 
 double retornaDistancia(HeapBinario* heap, int vertice){
@@ -146,4 +153,11 @@ double retornaDistancia(HeapBinario* heap, int vertice){
         return -1;
     }
     return heap->arvore[heap->mapa[vertice]].distancia;
+}
+
+void printHeap (HeapBinario* heap){
+    int i;
+    for (i = 1; i <= heap->numElementos; i++)
+        printf("%d\n",heap->arvore[i].mapaDeRetorno);
+    printf("\n");
 }

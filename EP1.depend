@@ -52,7 +52,7 @@
 	"heap_binario.h"
 	"grafo_listaadj.h"
 
-1526011009 source:c:\users\casa\desktop\aed_2-ep_1\grafo_listaadj.c
+1526085152 source:c:\users\casa\desktop\aed_2-ep_1\grafo_listaadj.c
 	<stdlib.h>
 	<stdbool.h>
 	"grafo_listaadj.h"
@@ -62,16 +62,29 @@
 	<stdlib.h>
 	<stdbool.h>
 
-1525967886 source:c:\users\casa\desktop\aed_2-ep_1\heap_binario.c
+1526093288 source:c:\users\casa\desktop\aed_2-ep_1\heap_binario.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<math.h>
 	"heap_binario.h"
 
-1525967932 c:\users\casa\desktop\aed_2-ep_1\heap_binario.h
+1526091960 c:\users\casa\desktop\aed_2-ep_1\heap_binario.h
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<math.h>
+
+1526091619 source:c:\users\casa\desktop\aed_2-ep_1\dijkstra.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"heap_binario.h"
+	"grafo_listaadj.h"
+
+1525440882 source:c:\users\casa\downloads\exemplodbl_max.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<float.h>
 

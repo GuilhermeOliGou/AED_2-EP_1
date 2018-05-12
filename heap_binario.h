@@ -37,7 +37,7 @@ E no mapa de indexação
 E o realoca adequadamente nas estruturas
 Ela pega como parâmetro o heap de onde o Vértice tem origem
 O vértice que deverá ser alterado e o valor que ele assumirá*/
-void alteraElemento (HeapBinario* heap, int elementoAlterado, int valor);
+void alteraElemento (HeapBinario* heap, int elementoAlterado, double valor);
 
 /* Essa função inicializa o heap e define o vértice origem como tendo distância 0
 Ela pega como parâmetros o heap onde os dados serão colocados,
@@ -51,10 +51,17 @@ void heapify (HeapBinario* heap);
 /* Essa função retorna verdadeiro caso o heap ainda possua elementos*/
 bool possuiElementos (HeapBinario* heap);
 
-/* Essa função retorna o valor e exclui o elemento de maior prioridade no heap (pop)
+/* Essa função retorna o valor do elemento de maior prioridade no heap (pop)
 Ela pega como parâmetro o heap cuja raiz receberá o pop*/
-int popElementoPrioritario (HeapBinario* heap);
+double popElementoPrioritario (HeapBinario* heap);
+
+/* Essa função exclui o elemento de maior prioridade
+E reorganiza o grafo para que ele se mantenha ordenado
+Ela pega como parâmetro o grafo que será reorganizado*/
+void excluiElementoPrioritario(HeapBinario* heap);
 
 /* Essa função retorna a distância de um vértice específico da raiz
 Ela pega como parâmetros o heap de onde o vértice tem origem e o vértice*/
 double retornaDistancia(HeapBinario* heap, int vertice);
+
+void printHeap (HeapBinario* heap);
