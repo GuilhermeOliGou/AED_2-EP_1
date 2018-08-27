@@ -5,7 +5,6 @@
 #include "grafo_listaadj.h"
 
 #define DBL_MAX 2147483647
-#define inf INFINITY
 
 void relaxamentos (TipoGrafo* grafo, HeapBinario* heap, int indice, int* anterior){
     if (indice <= 0){
@@ -70,13 +69,7 @@ bool dijkstra (TipoGrafo* grafo, int tamanhoGrafo, int s, double* distancias, in
     return true;
 }
 
-bool recebeEntrada (TipoGrafo* grafo, int* inicial, char* nome){
-    FILE* entrada = fopen(nome,"rt");
-    if(!entrada){
-        printf("Arquivo não existe!\n");
-        return false;
-    }
-
+bool recebeEntrada (TipoGrafo* grafo, int* inicial, FILE* entrada){
     int s;
     fscanf(entrada,"%d\n",&s);
     *inicial = s;
@@ -102,7 +95,7 @@ bool recebeEntrada (TipoGrafo* grafo, int* inicial, char* nome){
     return true;
 }
 
-void escreveSaida (TipoGrafo* grafo, int s, char* nome){
+void escreveSaida (TipoGrafo* grafo, int s, FILE* saida){
     int i;
     int tamanhoGrafo = obtemNrVertices(grafo);
     double* distancias = (double*)calloc(tamanhoGrafo+1, sizeof(double));
@@ -119,12 +112,10 @@ void escreveSaida (TipoGrafo* grafo, int s, char* nome){
         printf("Falha na execução do dijkstra!\n");
         return;
     }
-    FILE* saida;
-    saida = fopen(nome,"w");
     for (i = 1; i <= tamanhoGrafo; i++){
         fprintf(saida,"%d ", i);
         if (distancias[i] == DBL_MAX){
-            fprintf(saida,"%.2e ", inf);
+            fprintf(saida,"%.2e ", DBL_MAX);
         }else{
             fprintf(saida,"%f ", distancias[i]);
         }
@@ -133,21 +124,16 @@ void escreveSaida (TipoGrafo* grafo, int s, char* nome){
     fclose(saida);
 }
 
-int main(){
+int main(int argc, char** argv){
+    FILE* entrada = fopen(argv[1],"rt");
+    FILE* saida = fopen(argv[2],"rt");
+
     TipoGrafo grafo;
     int s;
-    char entrada[100];
 
-    printf("Nome do arquivo de entrada\n");
-    scanf("%s", &entrada);
+    if (recebeEntrada(&grafo,&s,entrada)){
 
-    if (recebeEntrada(&grafo,&s,&entrada)){
-        //imprimeGrafo(&grafo);
-        char saida[100];
-
-    printf("Nome do arquivo de saida\n");
-    scanf("%s", &saida);
-        escreveSaida(&grafo,s,&saida);
+        escreveSaida(&grafo,s,saida);
     }else{
         printf("Arquivo não foi lido!\n");
     }
