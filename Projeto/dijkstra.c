@@ -21,9 +21,7 @@ void relaxamentos (TipoGrafo* grafo, HeapBinario* heap, int indice, int* anterio
     while (arestaAtual){
         printHeap(heap);
         novoPeso = retornaDistancia(heap,indice)+obtemPesoInstantaneo(arestaAtual);
-        //printf("%lf + %lf ", retornaDistancia(heap,indice),obtemPesoInstantaneo(arestaAtual));
         vDestino = verticeDestino(arestaAtual,grafo);
-        //printf("%d ",retornaDistancia(heap,indice),obtemPesoInstantaneo(arestaAtual), vDestino);
         printf("%lf + %lf < %lf\n",retornaDistancia(heap,indice),obtemPesoInstantaneo(arestaAtual), retornaDistancia(heap,vDestino));
         if (novoPeso < retornaDistancia(heap,vDestino)){
             alteraElemento(heap,vDestino,novoPeso);
